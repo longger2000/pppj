@@ -29,6 +29,46 @@ func main() {
 
 		fmt.Scanln(&key)
 
+		switch key {
+		case "1":
+			fmt.Println("--------------当前收支明细--------------")
+			fmt.Println(details)
+		case "2":
+			fmt.Println("本次收入金额：")
+			fmt.Scanln(&money)
+			balance += money
+			fmt.Println("本次收入说明：")
+			fmt.Scanln(&note)
+			details += fmt.Sprintf("\n收入\t %v\t  	%v\t  	 %v", balance, money, note)
+
+		case "3":
+			fmt.Println("本次支出金额：")
+			fmt.Scanln(&money)
+			if money > balance {
+				fmt.Println("余额不足")
+				break
+			}
+			balance -= money
+			fmt.Println("本次支出说明")
+			fmt.Scanln(&note)
+			details += fmt.Sprintf("\n支出\t	%v\t  	%v\t  	 %v", balance, money, note)
+		case "4":
+			fmt.Println("确认退出 输入 y 或者 n：")
+			choice := ""
+			for {
+				fmt.Scanln(&choice)
+				if choice == "y" || choice == "n" {
+					break
+				}
+				fmt.Println("输入错误 请重新输入")
+			}
+			if choice == "y" {
+				loop = false
+			}
+			loop = false
+		default:
+			fmt.Println("输入错误请从新输入")
+		}
 		if !loop {
 			break
 		}
